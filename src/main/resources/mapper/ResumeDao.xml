@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happy.gym.dao.ResumeDao">
+  <resultMap id="BaseResultMap" type="com.happy.gym.pojo.Resume">
+    <id column="rsm_id" jdbcType="INTEGER" property="rsmId" />
+    <result column="rsm_realname" jdbcType="VARCHAR" property="rsmRealname" />
+    <result column="rsm_sex" jdbcType="BOOLEAN" property="rsmSex" />
+    <result column="rsm_nation" jdbcType="VARCHAR" property="rsmNation" />
+    <result column="rsm_birth" jdbcType="DATE" property="rsmBirth" />
+    <result column="rsm_cerid" jdbcType="INTEGER" property="rsmCerid" />
+    <result column="rsm_tel" jdbcType="INTEGER" property="rsmTel" />
+    <result column="rsm_colle" jdbcType="VARCHAR" property="rsmColle" />
+    <result column="rsm_degree" jdbcType="VARCHAR" property="rsmDegree" />
+    <result column="rsm_wkyear" jdbcType="BOOLEAN" property="rsmWkyear" />
+    <result column="rsm_major" jdbcType="VARCHAR" property="rsmMajor" />
+    <result column="rsm_note" jdbcType="VARCHAR" property="rsmNote" />
+    <result column="rsm_edu_id" jdbcType="INTEGER" property="rsmEduId" />
+    <result column="rsm_wkep_id" jdbcType="INTEGER" property="rsmWkepId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rsm_id, rsm_realname, rsm_sex, rsm_nation, rsm_birth, rsm_cerid, rsm_tel, rsm_colle, 
+    rsm_degree, rsm_wkyear, rsm_major, rsm_note, rsm_edu_id, rsm_wkep_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resume
+    where rsm_id = #{rsmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resume
+    where rsm_id = #{rsmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="rsm_id" keyProperty="rsmId" parameterType="com.happy.gym.pojo.Resume" useGeneratedKeys="true">
+    insert into resume (rsm_realname, rsm_sex, rsm_nation, 
+      rsm_birth, rsm_cerid, rsm_tel, 
+      rsm_colle, rsm_degree, rsm_wkyear, 
+      rsm_major, rsm_note, rsm_edu_id, 
+      rsm_wkep_id)
+    values (#{rsmRealname,jdbcType=VARCHAR}, #{rsmSex,jdbcType=BOOLEAN}, #{rsmNation,jdbcType=VARCHAR}, 
+      #{rsmBirth,jdbcType=DATE}, #{rsmCerid,jdbcType=INTEGER}, #{rsmTel,jdbcType=INTEGER}, 
+      #{rsmColle,jdbcType=VARCHAR}, #{rsmDegree,jdbcType=VARCHAR}, #{rsmWkyear,jdbcType=BOOLEAN}, 
+      #{rsmMajor,jdbcType=VARCHAR}, #{rsmNote,jdbcType=VARCHAR}, #{rsmEduId,jdbcType=INTEGER}, 
+      #{rsmWkepId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="rsm_id" keyProperty="rsmId" parameterType="com.happy.gym.pojo.Resume" useGeneratedKeys="true">
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rsmRealname != null">
+        rsm_realname,
+      </if>
+      <if test="rsmSex != null">
+        rsm_sex,
+      </if>
+      <if test="rsmNation != null">
+        rsm_nation,
+      </if>
+      <if test="rsmBirth != null">
+        rsm_birth,
+      </if>
+      <if test="rsmCerid != null">
+        rsm_cerid,
+      </if>
+      <if test="rsmTel != null">
+        rsm_tel,
+      </if>
+      <if test="rsmColle != null">
+        rsm_colle,
+      </if>
+      <if test="rsmDegree != null">
+        rsm_degree,
+      </if>
+      <if test="rsmWkyear != null">
+        rsm_wkyear,
+      </if>
+      <if test="rsmMajor != null">
+        rsm_major,
+      </if>
+      <if test="rsmNote != null">
+        rsm_note,
+      </if>
+      <if test="rsmEduId != null">
+        rsm_edu_id,
+      </if>
+      <if test="rsmWkepId != null">
+        rsm_wkep_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rsmRealname != null">
+        #{rsmRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmSex != null">
+        #{rsmSex,jdbcType=BOOLEAN},
+      </if>
+      <if test="rsmNation != null">
+        #{rsmNation,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmBirth != null">
+        #{rsmBirth,jdbcType=DATE},
+      </if>
+      <if test="rsmCerid != null">
+        #{rsmCerid,jdbcType=INTEGER},
+      </if>
+      <if test="rsmTel != null">
+        #{rsmTel,jdbcType=INTEGER},
+      </if>
+      <if test="rsmColle != null">
+        #{rsmColle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmDegree != null">
+        #{rsmDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmWkyear != null">
+        #{rsmWkyear,jdbcType=BOOLEAN},
+      </if>
+      <if test="rsmMajor != null">
+        #{rsmMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmNote != null">
+        #{rsmNote,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmEduId != null">
+        #{rsmEduId,jdbcType=INTEGER},
+      </if>
+      <if test="rsmWkepId != null">
+        #{rsmWkepId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.happy.gym.pojo.Resume">
+    update resume
+    <set>
+      <if test="rsmRealname != null">
+        rsm_realname = #{rsmRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmSex != null">
+        rsm_sex = #{rsmSex,jdbcType=BOOLEAN},
+      </if>
+      <if test="rsmNation != null">
+        rsm_nation = #{rsmNation,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmBirth != null">
+        rsm_birth = #{rsmBirth,jdbcType=DATE},
+      </if>
+      <if test="rsmCerid != null">
+        rsm_cerid = #{rsmCerid,jdbcType=INTEGER},
+      </if>
+      <if test="rsmTel != null">
+        rsm_tel = #{rsmTel,jdbcType=INTEGER},
+      </if>
+      <if test="rsmColle != null">
+        rsm_colle = #{rsmColle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmDegree != null">
+        rsm_degree = #{rsmDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmWkyear != null">
+        rsm_wkyear = #{rsmWkyear,jdbcType=BOOLEAN},
+      </if>
+      <if test="rsmMajor != null">
+        rsm_major = #{rsmMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmNote != null">
+        rsm_note = #{rsmNote,jdbcType=VARCHAR},
+      </if>
+      <if test="rsmEduId != null">
+        rsm_edu_id = #{rsmEduId,jdbcType=INTEGER},
+      </if>
+      <if test="rsmWkepId != null">
+        rsm_wkep_id = #{rsmWkepId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rsm_id = #{rsmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.happy.gym.pojo.Resume">
+    update resume
+    set rsm_realname = #{rsmRealname,jdbcType=VARCHAR},
+      rsm_sex = #{rsmSex,jdbcType=BOOLEAN},
+      rsm_nation = #{rsmNation,jdbcType=VARCHAR},
+      rsm_birth = #{rsmBirth,jdbcType=DATE},
+      rsm_cerid = #{rsmCerid,jdbcType=INTEGER},
+      rsm_tel = #{rsmTel,jdbcType=INTEGER},
+      rsm_colle = #{rsmColle,jdbcType=VARCHAR},
+      rsm_degree = #{rsmDegree,jdbcType=VARCHAR},
+      rsm_wkyear = #{rsmWkyear,jdbcType=BOOLEAN},
+      rsm_major = #{rsmMajor,jdbcType=VARCHAR},
+      rsm_note = #{rsmNote,jdbcType=VARCHAR},
+      rsm_edu_id = #{rsmEduId,jdbcType=INTEGER},
+      rsm_wkep_id = #{rsmWkepId,jdbcType=INTEGER}
+    where rsm_id = #{rsmId,jdbcType=INTEGER}
+  </update>
+</mapper>

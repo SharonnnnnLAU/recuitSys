@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happy.gym.dao.JobDao">
+  <resultMap id="BaseResultMap" type="com.happy.gym.pojo.Job">
+    <id column="jo_id" jdbcType="INTEGER" property="joId" />
+    <result column="jo_title" jdbcType="VARCHAR" property="joTitle" />
+    <result column="jo_num" jdbcType="INTEGER" property="joNum" />
+    <result column="jo_city" jdbcType="VARCHAR" property="joCity" />
+    <result column="jo_type" jdbcType="VARCHAR" property="joType" />
+    <result column="jo_wkyear" jdbcType="INTEGER" property="joWkyear" />
+    <result column="jo_degree" jdbcType="VARCHAR" property="joDegree" />
+    <result column="jo_major" jdbcType="VARCHAR" property="joMajor" />
+    <result column="jo_require" jdbcType="VARCHAR" property="joRequire" />
+    <result column="jo_content" jdbcType="VARCHAR" property="joContent" />
+    <result column="jo_starttime" jdbcType="DATE" property="joStarttime" />
+    <result column="jo_endtime" jdbcType="DATE" property="joEndtime" />
+    <result column="jo_isdel" jdbcType="BOOLEAN" property="joIsdel" />
+    <result column="jo_dept" jdbcType="VARCHAR" property="joDept" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    jo_id, jo_title, jo_num, jo_city, jo_type, jo_wkyear, jo_degree, jo_major, jo_require,
+    jo_content, jo_starttime, jo_endtime, jo_isdel, jo_dept
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from job
+    where jo_id = #{joId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from job
+    where jo_id = #{joId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="jo_id" keyProperty="joId" parameterType="com.happy.gym.pojo.Job" useGeneratedKeys="true">
+    insert into job (jo_title, jo_num, jo_city,
+      jo_type, jo_wkyear, jo_degree,
+      jo_major, jo_require, jo_content,
+      jo_starttime, jo_endtime, jo_isdel,
+      jo_dept)
+    values (#{joTitle,jdbcType=VARCHAR}, #{joNum,jdbcType=INTEGER}, #{joCity,jdbcType=VARCHAR},
+      #{joType,jdbcType=VARCHAR}, #{joWkyear,jdbcType=INTEGER}, #{joDegree,jdbcType=VARCHAR},
+      #{joMajor,jdbcType=VARCHAR}, #{joRequire,jdbcType=VARCHAR}, #{joContent,jdbcType=VARCHAR},
+      #{joStarttime,jdbcType=DATE}, #{joEndtime,jdbcType=DATE}, #{joIsdel,jdbcType=BOOLEAN},
+      #{joDept,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="jo_id" keyProperty="joId" parameterType="com.happy.gym.pojo.Job" useGeneratedKeys="true">
+    insert into job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="joTitle != null">
+        jo_title,
+      </if>
+      <if test="joNum != null">
+        jo_num,
+      </if>
+      <if test="joCity != null">
+        jo_city,
+      </if>
+      <if test="joType != null">
+        jo_type,
+      </if>
+      <if test="joWkyear != null">
+        jo_wkyear,
+      </if>
+      <if test="joDegree != null">
+        jo_degree,
+      </if>
+      <if test="joMajor != null">
+        jo_major,
+      </if>
+      <if test="joRequire != null">
+        jo_require,
+      </if>
+      <if test="joContent != null">
+        jo_content,
+      </if>
+      <if test="joStarttime != null">
+        jo_starttime,
+      </if>
+      <if test="joEndtime != null">
+        jo_endtime,
+      </if>
+      <if test="joIsdel != null">
+        jo_isdel,
+      </if>
+      <if test="joDept != null">
+        jo_dept,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="joTitle != null">
+        #{joTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="joNum != null">
+        #{joNum,jdbcType=INTEGER},
+      </if>
+      <if test="joCity != null">
+        #{joCity,jdbcType=VARCHAR},
+      </if>
+      <if test="joType != null">
+        #{joType,jdbcType=VARCHAR},
+      </if>
+      <if test="joWkyear != null">
+        #{joWkyear,jdbcType=INTEGER},
+      </if>
+      <if test="joDegree != null">
+        #{joDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="joMajor != null">
+        #{joMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="joRequire != null">
+        #{joRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="joContent != null">
+        #{joContent,jdbcType=VARCHAR},
+      </if>
+      <if test="joStarttime != null">
+        #{joStarttime,jdbcType=DATE},
+      </if>
+      <if test="joEndtime != null">
+        #{joEndtime,jdbcType=DATE},
+      </if>
+      <if test="joIsdel != null">
+        #{joIsdel,jdbcType=BOOLEAN},
+      </if>
+      <if test="joDept != null">
+        #{joDept,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.happy.gym.pojo.Job">
+    update job
+    <set>
+      <if test="joTitle != null">
+        jo_title = #{joTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="joNum != null">
+        jo_num = #{joNum,jdbcType=INTEGER},
+      </if>
+      <if test="joCity != null">
+        jo_city = #{joCity,jdbcType=VARCHAR},
+      </if>
+      <if test="joType != null">
+        jo_type = #{joType,jdbcType=VARCHAR},
+      </if>
+      <if test="joWkyear != null">
+        jo_wkyear = #{joWkyear,jdbcType=INTEGER},
+      </if>
+      <if test="joDegree != null">
+        jo_degree = #{joDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="joMajor != null">
+        jo_major = #{joMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="joRequire != null">
+        jo_require = #{joRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="joContent != null">
+        jo_content = #{joContent,jdbcType=VARCHAR},
+      </if>
+      <if test="joStarttime != null">
+        jo_starttime = #{joStarttime,jdbcType=DATE},
+      </if>
+      <if test="joEndtime != null">
+        jo_endtime = #{joEndtime,jdbcType=DATE},
+      </if>
+      <if test="joIsdel != null">
+        jo_isdel = #{joIsdel,jdbcType=BOOLEAN},
+      </if>
+      <if test="joDept != null">
+        jo_dept = #{joDept,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jo_id = #{joId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.happy.gym.pojo.Job">
+    update job
+    set jo_title = #{joTitle,jdbcType=VARCHAR},
+      jo_num = #{joNum,jdbcType=INTEGER},
+      jo_city = #{joCity,jdbcType=VARCHAR},
+      jo_type = #{joType,jdbcType=VARCHAR},
+      jo_wkyear = #{joWkyear,jdbcType=INTEGER},
+      jo_degree = #{joDegree,jdbcType=VARCHAR},
+      jo_major = #{joMajor,jdbcType=VARCHAR},
+      jo_require = #{joRequire,jdbcType=VARCHAR},
+      jo_content = #{joContent,jdbcType=VARCHAR},
+      jo_starttime = #{joStarttime,jdbcType=DATE},
+      jo_endtime = #{joEndtime,jdbcType=DATE},
+      jo_isdel = #{joIsdel,jdbcType=BOOLEAN},
+      jo_dept = #{joDept,jdbcType=VARCHAR}
+    where jo_id = #{joId,jdbcType=INTEGER}
+  </update>
+
+  <!--获取岗位信息列表-->
+  <select id="listJob" resultType="com.happy.gym.pojo.Job">
+    SELECT
+      jo_id AS joId,
+      jo_dept AS joDept,
+      jo_title AS joTitle,
+      jo_num AS joNum,
+      jo_city AS joCity,
+      jo_type AS joType,
+      jo_wkyear AS joWkyear,
+      jo_degree AS joDegree,
+      jo_major AS joMajor,
+      jo_require AS joRequire,
+      jo_content AS joContent
+    FROM
+      job
+    WHERE
+      jo_type = #{type}
+    AND jo_isdel = 0
+  </select>
+
+<!--  获取所有岗位信息-->
+  <select id="listAllJob" resultType="com.happy.gym.pojo.Job">
+    SELECT
+      jo_id AS joId,
+      jo_dept AS joDept,
+      jo_title AS joTitle,
+      jo_num AS joNum,
+      jo_city AS joCity,
+      jo_type AS joType,
+      jo_wkyear AS joWkyear,
+      jo_degree AS joDegree,
+      jo_major AS joMajor,
+      jo_require AS joRequire,
+      jo_content AS joContent
+    FROM
+      job
+    where jo_isdel = 0
+  </select>
+
+<!--  通过岗位id获取岗位详细信息-->
+  <select id="jobDetail" resultType="com.happy.gym.model.vo.JobUserSerVo">
+    SELECT
+      jo_id AS joId,
+      jo_dept AS joDept,
+      jo_title AS joTitle,
+      jo_num AS joNum,
+      jo_city AS joCity,
+      jo_type AS joType,
+      jo_wkyear AS joWkyear,
+      jo_degree AS joDegree,
+      jo_require AS joRequire,
+      jo_content AS joContent,
+      jo_starttime AS joStarttime,
+      jo_endtime AS joEndtime
+    FROM
+      job
+    WHERE
+      jo_id = #{id}
+    AND jo_isdel = 0
+  </select>
+
+<!--  修改岗位信息-->
+  <update id="jobInfoUpdate">
+    update job
+    set jo_city = #{joCity,jdbcType=VARCHAR},
+        jo_title = #{joTitle,jdbcType=VARCHAR},
+        jo_num = #{joNum,jdbcType=INTEGER},
+        jo_type = #{joType,jdbcType=VARCHAR},
+        jo_require = #{joRequire,jdbcType=VARCHAR},
+        jo_content = #{joContent,jdbcType=VARCHAR},
+        jo_dept = #{joDept,jdbcType=VARCHAR}
+    where jo_id = #{joId,jdbcType=INTEGER}
+  </update>
+
+<!--  新增岗位-->
+  <insert id="jobAdd">
+    insert into job (jo_title, jo_num, jo_city,
+                     jo_type, jo_wkyear, jo_degree,
+                     jo_require, jo_content, jo_dept)
+    values (#{joTitle,jdbcType=VARCHAR},
+            #{joNum,jdbcType=INTEGER},
+            #{joCity,jdbcType=VARCHAR},
+            #{joType,jdbcType=VARCHAR},
+            #{joWkyear,jdbcType=INTEGER},
+            #{joDegree,jdbcType=VARCHAR},
+            #{joRequire,jdbcType=VARCHAR},
+            #{joContent,jdbcType=VARCHAR},
+            #{joDept,jdbcType=VARCHAR})
+  </insert>
+
+<!--  删除岗位-->
+  <update id="delJob">
+    update job
+    set jo_isdel = 1
+    where jo_id = #{id}
+  </update>
+</mapper>

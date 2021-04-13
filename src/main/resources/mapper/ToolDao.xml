@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happy.gym.dao.ToolDao">
+    <resultMap id="BaseResultMap" type="com.happy.gym.pojo.Tool">
+        <id column="t_id" jdbcType="INTEGER" property="tId"/>
+        <result column="t_type" jdbcType="VARCHAR" property="tType"/>
+        <result column="t_desc" jdbcType="VARCHAR" property="tDesc"/>
+        <result column="t_last_fix_time" jdbcType="TIMESTAMP" property="tLastFixTime"/>
+        <result column="t_shelf_life" jdbcType="INTEGER" property="tShelfLife"/>
+        <result column="t_scrap" jdbcType="BOOLEAN" property="tScrap"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_del" jdbcType="BOOLEAN" property="isDel"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    t_id, t_type, t_desc, t_last_fix_time, t_shelf_life, t_scrap, `count`, create_time,
+    update_time, is_del
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tool
+        where t_id = #{tId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tool
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="t_id" keyProperty="tId" parameterType="com.happy.gym.pojo.Tool"
+            useGeneratedKeys="true">
+    insert into tool (t_type, t_desc, t_last_fix_time,
+      t_shelf_life, t_scrap, `count`,
+      create_time, update_time, is_del
+      )
+    values (#{tType,jdbcType=VARCHAR}, #{tDesc,jdbcType=VARCHAR}, #{tLastFixTime,jdbcType=TIMESTAMP},
+      #{tShelfLife,jdbcType=INTEGER}, #{tScrap,jdbcType=BOOLEAN}, #{count,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BOOLEAN}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="t_id" keyProperty="tId" parameterType="com.happy.gym.pojo.Tool"
+            useGeneratedKeys="true">
+        insert into tool
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tType != null">
+                t_type,
+            </if>
+            <if test="tDesc != null">
+                t_desc,
+            </if>
+            <if test="tLastFixTime != null">
+                t_last_fix_time,
+            </if>
+            <if test="tShelfLife != null">
+                t_shelf_life,
+            </if>
+            <if test="tScrap != null">
+                t_scrap,
+            </if>
+            <if test="count != null">
+                `count`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tType != null">
+                #{tType,jdbcType=VARCHAR},
+            </if>
+            <if test="tDesc != null">
+                #{tDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tLastFixTime != null">
+                #{tLastFixTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tShelfLife != null">
+                #{tShelfLife,jdbcType=INTEGER},
+            </if>
+            <if test="tScrap != null">
+                #{tScrap,jdbcType=BOOLEAN},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BOOLEAN},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 新增器材信息-->
+    <insert id="addTool">
+        INSERT INTO tool (t_type, t_desc,t_shelf_life)
+        VALUES
+        (#{tType}, #{tDesc}, #{tShelfLife})
+    </insert>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.happy.gym.pojo.Tool">
+        update tool
+        <set>
+            <if test="tType != null">
+                t_type = #{tType,jdbcType=VARCHAR},
+            </if>
+            <if test="tDesc != null">
+                t_desc = #{tDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tLastFixTime != null">
+                t_last_fix_time = #{tLastFixTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tShelfLife != null">
+                t_shelf_life = #{tShelfLife,jdbcType=INTEGER},
+            </if>
+            <if test="tScrap != null">
+                t_scrap = #{tScrap,jdbcType=BOOLEAN},
+            </if>
+            <if test="count != null">
+                `count` = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BOOLEAN},
+            </if>
+        </set>
+        where t_id = #{tId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.happy.gym.pojo.Tool">
+    update tool
+    set t_type = #{tType,jdbcType=VARCHAR},
+      t_desc = #{tDesc,jdbcType=VARCHAR},
+      t_last_fix_time = #{tLastFixTime,jdbcType=TIMESTAMP},
+      t_shelf_life = #{tShelfLife,jdbcType=INTEGER},
+      t_scrap = #{tScrap,jdbcType=BOOLEAN},
+      `count` = #{count,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=BOOLEAN}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+
+    <!--获取器材管理信息-->
+    <select id="listTool" resultType="com.happy.gym.model.vo.ToolListVo">
+      SELECT
+        t_id AS tId,
+        t_type AS tType,
+        t_desc AS tDesc,
+        t_last_fix_time AS tLastFixTime,
+        t_shelf_life AS tShelfLife,
+        t_scrap AS tScrap
+      FROM
+        tool t
+      WHERE
+        t.is_del = 0
+        ORDER BY t_type DESC
+    </select>
+
+    <!--更改器材报废状态-->
+    <update id="modToolStatus">
+        UPDATE tool
+        SET t_scrap = t_scrap ^ 1
+        WHERE
+          t_id = #{id}
+        AND is_del = 0
+    </update>
+
+    <!-- 通过器材id获取器材基本信息 -->
+    <select id="findToolDetail" resultType="com.happy.gym.model.vo.ToolListVo">
+        SELECT
+        t_id AS tId,
+        t_type AS tType,
+        t_desc AS tDesc,
+        t_last_fix_time AS tLastFixTime,
+        t_shelf_life AS tShelfLife,
+        t_scrap AS tScrap
+      FROM
+        tool
+      WHERE
+        t_id = #{id} and
+        is_del = 0
+    </select>
+
+    <!-- 通过器材id删除器材信息-->
+    <update id="delTool">
+        UPDATE tool
+        SET is_del = 1
+        WHERE
+          t_id = #{id}
+          AND is_del = 0
+          AND t_scrap = 1
+    </update>
+</mapper>
